@@ -269,7 +269,7 @@ _global.HTMLCS = new (function () {
         data: data,
         recurrence: 0,
       });
-    } else {
+    } else if (_messages && _messages[_duplicates[textId]]) {
       // increment the recurrence counter.
       _messages[_duplicates[textId]].recurrence =
         _messages[_duplicates[textId]].recurrence + 1;
