@@ -1,5 +1,14 @@
 # HTML_CodeSniffer
 
+This fork is made for performance and accuracy.
+
+Todo: 
+
+1. remove grunt and use ts.
+1. load only translations for the page and not the entire language pack.
+1. improve performance.
+1. add coverage base.
+
 ## What is HTML_CodeSniffer?
 
 HTML_CodeSniffer is a JavaScript application that checks a HTML document

@@ -10,10 +10,8 @@ module.exports = function (grunt) {
           compress: false,
           mangle: false,
           beautify: true,
-          preserveComments: true,
-          banner:
-            '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */\n' +
-            grunt.file.read("Contrib/Build/umd-header.js"),
+          preserveComments: false,
+          banner: grunt.file.read("Contrib/Build/umd-header.js"),
           footer: grunt.file.read("Contrib/Build/umd-footer.js"),
         },
         files: {
@@ -29,10 +27,9 @@ module.exports = function (grunt) {
       },
       dist: {
         options: {
-          banner:
-            '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */\n' +
-            grunt.file.read("Contrib/Build/umd-header.js"),
+          banner: grunt.file.read("Contrib/Build/umd-header.js"),
           footer: grunt.file.read("Contrib/Build/umd-footer.js"),
+          preserveComments: false,
         },
         files: {
           "build/HTMLCS.js": [
@@ -42,24 +39,6 @@ module.exports = function (grunt) {
             "HTMLCS.Util.js",
             "Contrib/PhantomJS/runner.js",
             "Auditor/HTMLCSAuditor.js",
-          ],
-        },
-      },
-      bookmarklet: {
-        options: {
-          banner:
-            '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */\n' +
-            grunt.file.read("Contrib/Build/header-bookmarklet.js"),
-          footer: grunt.file.read("Contrib/Build/umd-footer.js"),
-        },
-        files: {
-          "build/HTMLCS.js": [
-            "Translations/*.js",
-            "Standards/**/*.js",
-            "HTMLCS.js",
-            "HTMLCS.Util.js",
-            "Contrib/PhantomJS/runner.js",
-            "Auditor/Auditor_with_beacon.js",
           ],
         },
       },
@@ -101,7 +80,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask("default", ["eslint"]);
   grunt.registerTask("build", ["uglify:dist", "copy:dist"]);
-  grunt.registerTask("build-bookmarklet", ["uglify:bookmarklet", "copy:dist"]);
 
   return grunt.registerTask("build-debug", ["uglify:debug", "copy:dist"]);
 };

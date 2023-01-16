@@ -1,16 +1,3 @@
-/**
- * +--------------------------------------------------------------------+
- * | This HTML_CodeSniffer file is Copyright (c)                        |
- * | Squiz Pty Ltd (ABN 77 084 670 600)                                 |
- * +--------------------------------------------------------------------+
- * | IMPORTANT: Your use of this Software is subject to the terms of    |
- * | the Licence provided in the file licence.txt. If you cannot find   |
- * | this file please contact Squiz (www.squiz.com.au) so we may        |
- * | provide you a copy.                                                |
- * +--------------------------------------------------------------------+
- *
- */
-
 _global.HTMLCS = new (function () {
   var _standards = {};
   var _sniffs = [];
@@ -191,8 +178,7 @@ _global.HTMLCS = new (function () {
     }
 
     if (!element) {
-      callback.call(this);
-      return;
+      return callback.call(this);
     }
 
     callback = callback || function () {};
@@ -223,11 +209,13 @@ _global.HTMLCS = new (function () {
   this.isFullDoc = function (content) {
     var fullDoc = false;
     if (typeof content === "string") {
-      if (content.toLowerCase().indexOf("<html") !== -1) {
+      var lowercaseContent = content.toLowerCase();
+
+      if (lowercaseContent.indexOf("<html") !== -1) {
         fullDoc = true;
       } else if (
-        content.toLowerCase().indexOf("<head") !== -1 &&
-        content.toLowerCase().indexOf("<body") !== -1
+        lowercaseContent.indexOf("<head") !== -1 &&
+        lowercaseContent.indexOf("<body") !== -1
       ) {
         fullDoc = true;
       }
@@ -420,7 +408,6 @@ _global.HTMLCS = new (function () {
   var _registerStandard = function (standard, callback, failCallback, options) {
     // Get the object name.
     var parts = standard.split("/");
-
     // Get a copy of the ruleset object.
     var oldRuleSet = _global["HTMLCS_" + parts[parts.length - 2]];
     var ruleSet = {};
@@ -429,10 +416,6 @@ _global.HTMLCS = new (function () {
       if (oldRuleSet.hasOwnProperty(x) === true) {
         ruleSet[x] = oldRuleSet[x];
       }
-    }
-
-    if (!ruleSet) {
-      return false;
     }
 
     _standards[standard] = ruleSet;
@@ -454,8 +437,7 @@ _global.HTMLCS = new (function () {
     } //end if
 
     // Register the sniffs for this standard.
-    var sniffs = ruleSet.sniffs.slice(0, ruleSet.sniffs.length);
-    _registerSniffs(standard, sniffs, callback, failCallback);
+    _registerSniffs(standard, ruleSet.sniffs.slice(0, ruleSet.sniffs.length), callback, failCallback);
   };
 
   /**
