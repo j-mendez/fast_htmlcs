@@ -12,7 +12,7 @@
  */
 
 _global.HTMLCS_WCAG2AAA_Sniffs_Principle2_Guideline2_5_2_5_2 = {
-    /**
+  /**
    * Determines the elements to register for processing.
    *
    * Each element of the returned array can either be an element name, or "_top"
@@ -20,45 +20,45 @@ _global.HTMLCS_WCAG2AAA_Sniffs_Principle2_Guideline2_5_2_5_2 = {
    *
    * @returns {Array} The list of elements.
    */
-    register: function() {
-        return ["_top"];
-    },
+  register: function () {
+    return ["_top"];
+  },
 
-    /**
+  /**
    * Process the registered element.
    *
    * @param {DOMNode} element The element registered.
    * @param {DOMNode} top     The top element of the tested code.
    */
-    process: function(element, top) {
-        HTMLCS.addMessage(
-            HTMLCS.NOTICE,
-            top,
-            _global.HTMLCS.getTranslation("2_5_2.SinglePointer_Check"),
-            ""
-        );
+  process: function (element, top) {
+    HTMLCS.addMessage(
+      HTMLCS.NOTICE,
+      top,
+      _global.HTMLCS.getTranslation("2_5_2.SinglePointer_Check"),
+      ""
+    );
 
-        if (element == top) {
-            var allMousedown = HTMLCS.util.getAllElements(top, "*[onmousedown]");
-            for (var i = 0; i < allMousedown.length; i++) {
-                var x = allMousedown[i];
-                HTMLCS.addMessage(
-                    HTMLCS.NOTICE,
-                    x,
-                    _global.HTMLCS.getTranslation("2_5_2.Mousedown_Check"),
-                    ""
-                );
-            }
-            var allTouchstart = HTMLCS.util.getAllElements(top, "*[ontouchstart]");
-            for (var i = 0; i < allTouchstart.length; i++) {
-                var x = allTouchstart[i];
-                HTMLCS.addMessage(
-                    HTMLCS.NOTICE,
-                    x,
-                    _global.HTMLCS.getTranslation("2_5_2.Touchstart_Check"),
-                    ""
-                );
-            }
-        }
+    if (element == top) {
+      var allMousedown = HTMLCS.util.getAllElements(top, "*[onmousedown]");
+      for (var i = 0; i < allMousedown.length; i++) {
+        var x = allMousedown[i];
+        HTMLCS.addMessage(
+          HTMLCS.NOTICE,
+          x,
+          _global.HTMLCS.getTranslation("2_5_2.Mousedown_Check"),
+          ""
+        );
+      }
+      var allTouchstart = HTMLCS.util.getAllElements(top, "*[ontouchstart]");
+      for (var i = 0; i < allTouchstart.length; i++) {
+        var x = allTouchstart[i];
+        HTMLCS.addMessage(
+          HTMLCS.NOTICE,
+          x,
+          _global.HTMLCS.getTranslation("2_5_2.Touchstart_Check"),
+          ""
+        );
+      }
     }
+  },
 };

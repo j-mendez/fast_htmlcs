@@ -2,7 +2,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON("./package.json"),
     eslint: {
-      target: ["Standards/**/*.js", "Contrib/PhantomJS/*.js"],
+      target: ["Standards/**/*.js"],
     },
     uglify: {
       debug: {
@@ -20,8 +20,6 @@ module.exports = function (grunt) {
             "Standards/**/*.js",
             "HTMLCS.js",
             "HTMLCS.Util.js",
-            "Contrib/PhantomJS/runner.js",
-            "Auditor/HTMLCSAuditor.js",
           ],
         },
       },
@@ -37,8 +35,6 @@ module.exports = function (grunt) {
             "Standards/**/*.js",
             "HTMLCS.js",
             "HTMLCS.Util.js",
-            "Contrib/PhantomJS/runner.js",
-            "Auditor/HTMLCSAuditor.js",
           ],
         },
       },
@@ -46,23 +42,6 @@ module.exports = function (grunt) {
     copy: {
       dist: {
         files: [
-          {
-            expand: true,
-            flatten: true,
-            src: "Auditor/HTMLCSAuditor.css",
-            rename: function (dest, src) {
-              return dest + "/HTMLCS.css";
-            },
-            dest: "build",
-            filter: "isFile",
-          },
-          {
-            expand: true,
-            flatten: true,
-            src: "Auditor/Images/*",
-            dest: "build/Images",
-            filter: "isFile",
-          },
           {
             expand: true,
             flatten: true,

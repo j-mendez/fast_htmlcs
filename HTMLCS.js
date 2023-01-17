@@ -7,13 +7,13 @@ _global.HTMLCS = new (function () {
 
   var _messages = [];
   var _msgOverrides = {};
-  var _duplicates = {};
+  var _duplicates = new Map();
   /*
         Message type constants.
     */
-  this.ERROR = 1;
-  this.WARNING = 2;
-  this.NOTICE = 3;
+  this.ERROR = "error";
+  this.WARNING = "warning";
+  this.NOTICE = "notice";
 
   // The current language to use.
   this.lang = "en";
@@ -74,19 +74,12 @@ _global.HTMLCS = new (function () {
     var translations = _global.translation[this.lang];
 
     if (!translations) {
-      console.error("Missing translations for language " + this.lang);
       return "";
     }
 
     var translation = translations[text];
 
     if (!translation) {
-      console.error(
-        'Translation for "' +
-          text +
-          '" does not exist in current language ' +
-          this.lang
-      );
       return "";
     }
 
@@ -243,24 +236,25 @@ _global.HTMLCS = new (function () {
    * @param {Object}  [data]      Extra data to store for the message.
    */
   this.addMessage = function (type, element, msg, code, data) {
-    code = _getMessageCode(code);
-    var textId = code + element.outerHTML;
+    var ccode = _getMessageCode(code);
+    var textId = ccode + element.outerHTML;
 
-    if (!_duplicates[textId]) {
+    if (!_duplicates.has(textId)) {
       // track the position to use to update the prior message on duplicates.
-      _duplicates[textId] = _messages.length + "";
+      _duplicates.set(textId, _messages.length);
       _messages.push({
         type: type,
         element: element,
-        msg: _msgOverrides[code] || msg,
-        code: code,
+        message: _msgOverrides[ccode] || msg,
+        code: ccode,
         data: data,
         recurrence: 0,
+        runner: "htmlcs",
       });
-    } else if (_messages && _messages[_duplicates[textId]]) {
+    } else {
+      var pos = _duplicates.get(textId);
       // increment the recurrence counter.
-      _messages[_duplicates[textId]].recurrence =
-        _messages[_duplicates[textId]].recurrence + 1;
+      _messages[pos].recurrence = _messages[pos].recurrence + 1;
     }
   };
 
@@ -273,7 +267,7 @@ _global.HTMLCS = new (function () {
    * @returns {Array} Array of message objects.
    */
   this.getMessages = function () {
-    return _messages.concat([]);
+    return _messages;
   };
 
   /**
@@ -316,7 +310,7 @@ _global.HTMLCS = new (function () {
       }
     } //end while
 
-    _messages = _messages.concat(topMsgs);
+    _messages.push(...topMsgs);
 
     // Due to filtering of presentation roles for general sniffing these need to be handled
     // separately. The 1.3.1 sniff needs to run to detect any incorrect usage of the presentation
@@ -437,7 +431,12 @@ _global.HTMLCS = new (function () {
     } //end if
 
     // Register the sniffs for this standard.
-    _registerSniffs(standard, ruleSet.sniffs.slice(0, ruleSet.sniffs.length), callback, failCallback);
+    _registerSniffs(
+      standard,
+      ruleSet.sniffs.slice(0, ruleSet.sniffs.length),
+      callback,
+      failCallback
+    );
   };
 
   /**
@@ -614,8 +613,7 @@ _global.HTMLCS = new (function () {
    * @returns {String} The full message code.
    */
   var _getMessageCode = function (code) {
-    code = _standard + "." + _currentSniff._name + "." + code;
-    return code;
+    return _standard + "." + _currentSniff._name + "." + code;
   };
 
   /**
