@@ -148,10 +148,11 @@ _global.HTMLCS.util = (function () {
    * @returns {Window}
    */
   self.getElementWindow = function (element) {
+    var doc = null;
     if (element.ownerDocument) {
-      var doc = element.ownerDocument;
+      doc = element.ownerDocument;
     } else {
-      var doc = element;
+      doc = element;
     }
 
     var window = null;
@@ -442,15 +443,18 @@ _global.HTMLCS.util = (function () {
   self.getAllElements = function (element, selector) {
     element = element || document;
     selector = selector || "*";
+
     var elements = Array.prototype.slice.call(
       element.querySelectorAll(selector)
     );
+
     var visible = elements.filter(function (elem) {
       return HTMLCS.util.isAccessibilityHidden(elem) === false;
     });
 
     // We shouldn't be testing elements inside the injected auditor code if it's present.
     var auditor = document.getElementById("HTMLCS-wrapper");
+
     if (auditor) {
       visible = visible.filter(function (elem) {
         return auditor.contains(elem) === false;

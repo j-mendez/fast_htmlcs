@@ -116,6 +116,7 @@ _global.HTMLCS = new (function () {
   this.run = function (callback, content) {
     var element = null;
     var loadingFrame = false;
+    // todo: remove iframe handling
     if (typeof content === "string") {
       loadingFrame = true;
       var elementFrame = document.createElement("iframe");
@@ -132,7 +133,7 @@ _global.HTMLCS = new (function () {
         this.onreadystatechange = null;
         this.onload = null;
 
-        if (HTMLCS.isFullDoc(content) === false) {
+        if (!HTMLCS.isFullDoc(content)) {
           element = element.getElementsByTagName("body")[0];
           var div = element.getElementsByTagName("div")[0];
           if (div && div.id === "__HTMLCS-source-wrap") {
@@ -157,7 +158,7 @@ _global.HTMLCS = new (function () {
       elementFrame.onload = elementFrame.load;
 
       if (
-        HTMLCS.isFullDoc(content) === false &&
+        !HTMLCS.isFullDoc(content) &&
         content.indexOf("<body") === -1
       ) {
         element.write('<div id="__HTMLCS-source-wrap">' + content + "</div>");
@@ -175,7 +176,6 @@ _global.HTMLCS = new (function () {
     }
 
     callback = callback || function () {};
-    _messages = [];
 
     // Get all the elements in the parent element.
     // Add the parent element too, which will trigger "_top" element codes.
@@ -202,20 +202,17 @@ _global.HTMLCS = new (function () {
   this.isFullDoc = function (content) {
     var fullDoc = false;
     if (typeof content === "string") {
-      var lowercaseContent = content.toLowerCase();
-
-      if (lowercaseContent.indexOf("<html") !== -1) {
+      if (content.startsWith("<html") || content.startsWith("<HTML") || content.startsWith("<!DOCTYPE html>") ) {
         fullDoc = true;
       } else if (
-        lowercaseContent.indexOf("<head") !== -1 &&
-        lowercaseContent.indexOf("<body") !== -1
+        content.indexOf("<head") !== -1 &&
+        content.indexOf("<body") !== -1
       ) {
         fullDoc = true;
       }
     } else {
-      // If we are the document, or the document element.
       if (
-        content.nodeName.toLowerCase() === "html" ||
+        content.nodeName === "HTML" ||
         content.documentElement
       ) {
         fullDoc = true;
@@ -281,11 +278,12 @@ _global.HTMLCS = new (function () {
     var topMsgs = [];
     while (elements.length > 0) {
       var element = elements.shift();
+      var tagName = "";
 
       if (element === topElement) {
-        var tagName = "_top";
+        tagName = "_top";
       } else {
-        var tagName = element.tagName.toLowerCase();
+        tagName = element.tagName.toLowerCase();
       }
 
       // First check whether any "top" messages need to be shifted off for this
@@ -293,6 +291,7 @@ _global.HTMLCS = new (function () {
       for (var i = 0; i < topMsgs.length; ) {
         if (element === topMsgs[i].element) {
           _messages.push(topMsgs[i]);
+          // todo: remove splicing
           topMsgs.splice(i, 1);
         } else {
           i++;
@@ -300,7 +299,7 @@ _global.HTMLCS = new (function () {
       } //end for
 
       if (_tags[tagName] && _tags[tagName].length > 0) {
-        _processSniffs(element, _tags[tagName].concat([]), topElement);
+        _processSniffs(element, _tags[tagName], topElement);
 
         // Save "top" messages, and reset the messages array.
         if (tagName === "_top") {
@@ -318,7 +317,9 @@ _global.HTMLCS = new (function () {
     var presentationElems = topElement.querySelectorAll(
       '[role="presentation"]'
     );
+
     _currentSniff = HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_3_1_3_1;
+
     [].forEach.call(presentationElems, function (element) {
       _currentSniff.testSemanticPresentationRole(element);
     });
