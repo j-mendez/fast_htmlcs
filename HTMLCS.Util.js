@@ -454,24 +454,25 @@ _global.HTMLCS.util = (function () {
     element = element || document;
     selector = selector || "*";
 
-    var elements = Array.prototype.slice.call(
-      element.querySelectorAll(selector)
-    );
-
-    var visible = elements.filter(function (elem) {
-      return HTMLCS.util.isAccessibilityHidden(elem) === false;
-    });
-
-    // We shouldn't be testing elements inside the injected auditor code if it's present.
+    var elements = element.querySelectorAll(selector);
+    var visibleElements = [];
     var auditor = document.getElementById("HTMLCS-wrapper");
-
+    
     if (auditor) {
-      visible = visible.filter(function (elem) {
-        return auditor.contains(elem) === false;
-      });
+      for (const elem of elements) {
+        if(!HTMLCS.util.isAccessibilityHidden(elem) && !auditor.contains(elem)) {
+          visibleElements.push(elem);
+        }
+      }
+    } else {
+      for (const elem of elements) {
+        if(!HTMLCS.util.isAccessibilityHidden(elem)) {
+          visibleElements.push(elem);
+        }
+      }
     }
-
-    return visible;
+        
+    return visibleElements;
   };
 
   /**

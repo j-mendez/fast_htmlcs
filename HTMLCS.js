@@ -134,14 +134,15 @@ _global.HTMLCS = new (function () {
         this.onload = null;
 
         if (!HTMLCS.isFullDoc(content)) {
-          element = element.getElementsByTagName("body")[0];
-          var div = element.getElementsByTagName("div")[0];
+          element = element.querySelector("body");
+          var div = element.querySelector("div");
           if (div && div.id === "__HTMLCS-source-wrap") {
             div.id = "";
             element = div;
           }
         }
 
+        // todo: remove converting elements to array
         var elements = HTMLCS.util.getAllElements(element);
         elements.unshift(element);
         _run(elements, element, callback);
