@@ -271,17 +271,23 @@ _global.HTMLCS.util = (function () {
    * @return {Boolean}
    */
   self.isAriaHidden = function (element) {
-    do {
-      // WAI-ARIA hidden attribute.
+    var testElement = element.parentElement;
+    var hiddenElement = false;
+
+    while (testElement) {
       if (
+        // WAI-ARIA presentation role.
         element.hasAttribute("aria-hidden") &&
         element.getAttribute("aria-hidden") === "true"
       ) {
-        return true;
+        hiddenElement = true;
+        break;
       }
-    } while ((element = element.parentElement));
 
-    return false;
+      testElement = testElement.parentElement
+    }
+
+    return hiddenElement;
   };
 
   /**
@@ -292,25 +298,26 @@ _global.HTMLCS.util = (function () {
    * @return {Boolean}
    */
   self.isAccessibilityHidden = function (element) {
-    do {
-      // WAI-ARIA presentation role.
-      if (
-        element.hasAttribute("role") &&
-        element.getAttribute("role") === "presentation"
-      ) {
-        return true;
-      }
+    var testElement = element.parentElement;
+    var hiddenElement = false;
 
-      // WAI-ARIA hidden attribute.
+    while (testElement) {
       if (
+        // WAI-ARIA presentation role.
+        element.hasAttribute("role") &&
+        element.getAttribute("role") === "presentation" ||
+        // WAI-ARIA hidden attribute.
         element.hasAttribute("aria-hidden") &&
         element.getAttribute("aria-hidden") === "true"
       ) {
-        return true;
+        hiddenElement = true;
+        break;
       }
-    } while ((element = element.parentElement));
 
-    return false;
+      testElement = testElement.parentElement
+    }
+
+    return hiddenElement;
   };
 
   /**
@@ -321,23 +328,26 @@ _global.HTMLCS.util = (function () {
    * @return {Boolean}
    */
   self.isFocusable = function (element) {
-    var nodeName = element.nodeName.toLowerCase();
-    if (self.isDisabled(element) === true) {
+
+    if (self.isDisabled(element) || self.isVisuallyHidden(element)) {
       return false;
     }
 
-    if (self.isVisuallyHidden(element) === true) {
-      return false;
-    }
+    var nodeName = element.nodeName;
 
     // Form elements.
-    if (/^(input|select|textarea|button|object)$/.test(nodeName)) {
+    if (
+      nodeName === "INPUT" ||
+      nodeName === "SELECT" ||
+      nodeName === "TEXTAREA" ||
+      nodeName === "BUTTON" ||
+      nodeName === "OBJECT") {
       return true;
     }
 
     // Hyperlinks without empty hrefs are focusable.
     if (
-      nodeName === "a" &&
+      nodeName === "A" &&
       element.hasAttribute("href") &&
       /^\s*$/.test(element.getAttribute("href")) === false
     ) {
