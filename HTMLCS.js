@@ -321,9 +321,9 @@ _global.HTMLCS = new (function () {
 
     _currentSniff = HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_3_1_3_1;
 
-    [].forEach.call(presentationElems, function (element) {
+    for (var element of presentationElems) {
       _currentSniff.testSemanticPresentationRole(element);
-    });
+    }
 
     if (callback instanceof Function === true) {
       callback.call(this);

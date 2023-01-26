@@ -99,20 +99,28 @@ _global.HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_3_1_3_1 = {
    * @param {DOMNode} element The element to test.
    */
   testSemanticPresentationRole: function (element) {
-    var permitted = ["div", "span", "b", "i"];
     if (
-      HTMLCS.util.isAriaHidden(element) === false &&
+      !HTMLCS.util.isAriaHidden(element) &&
       element.hasAttribute("role") &&
       element.getAttribute("role") === "presentation" &&
-      permitted.indexOf(element.nodeName.toLowerCase()) === -1
+      !(element.nodeName === "DIV" || element.nodeName === "SPAN" || element.nodeName === "B" || element.nodeName === "I")
     ) {
-      var children = element.querySelectorAll(
-        "*:not(" + permitted.join("):not(") + ")"
+      var childElements = element.querySelectorAll(
+        "*:not(" + ["div", "span", "b", "i"].join("):not(") + ")"
       );
-      children = [].filter.call(children, function (child) {
-        return child.hasAttribute("role") === false;
-      });
-      if (children.length) {
+      var children = new Array(childElements.length);
+      var childIterator = 0;
+
+      for (var child of childElements) {
+        if(!child.hasAttribute("role")) {
+          children[childIterator] = child;
+          childIterator++;
+        }
+      }
+
+      children.length = childIterator;
+
+      if (childIterator) {
         HTMLCS.addMessage(
           HTMLCS.ERROR,
           element,
@@ -131,21 +139,23 @@ _global.HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_3_1_3_1 = {
   testEmptyDupeLabelForAttrs: function (top) {
     this._labelNames = {};
     var labels = top.getElementsByTagName("label");
+    var refNode = null;
+
     for (var i = 0; i < labels.length; i++) {
+      var labelFor = labels[i].getAttribute("for");
       if (
-        labels[i].getAttribute("for") !== null &&
-        labels[i].getAttribute("for") !== ""
+        labelFor !== null &&
+        labelFor !== ""
       ) {
-        var labelFor = labels[i].getAttribute("for");
         if (this._labelNames[labelFor] && this._labelNames[labelFor] !== null) {
           this._labelNames[labelFor] = null;
         } else {
           this._labelNames[labelFor] = labels[i];
 
           if (top.ownerDocument) {
-            var refNode = top.ownerDocument.getElementById(labelFor);
+            refNode = top.ownerDocument.getElementById(labelFor);
           } else {
-            var refNode = top.getElementById(labelFor);
+            refNode = top.getElementById(labelFor);
           }
 
           if (refNode === null) {
@@ -154,21 +164,26 @@ _global.HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_3_1_3_1 = {
             var code = "H44.NonExistent";
             if (
               HTMLCS.isFullDoc(top) === true ||
-              top.nodeName.toLowerCase() === "body"
+              top.nodeName === "BODY"
             ) {
               level = HTMLCS.WARNING;
               msg = _global.HTMLCS.getTranslation(
                 "1_3_1_H44.NonExistentFragment"
               );
-              var code = "H44.NonExistentFragment";
+              code = "H44.NonExistentFragment";
             }
             HTMLCS.addMessage(level, labels[i], msg, code);
           } else {
-            var nodeName = refNode.nodeName.toLowerCase();
+            var nodeName = refNode && refNode.nodeName;
             if (
-              "input|select|textarea|button|keygen|meter|output|progress".indexOf(
-                nodeName
-              ) === -1
+              !(nodeName === "INPUT" ||
+              nodeName === "SELECT" ||
+              nodeName === "TEXTAREA" ||
+              nodeName === "BUTTON" ||
+              nodeName === "KEYGEN" ||
+              nodeName === "METER" ||
+              nodeName === "OUTPUT" ||
+              nodeName === "PROGRESS")
             ) {
               HTMLCS.addMessage(
                 HTMLCS.WARNING,
