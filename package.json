@@ -1,6 +1,6 @@
 {
   "name": "html_codesniffer_fork",
-  "version": "3.0.7",
+  "version": "3.0.8",
   "description": "HTML_CodeSniffer is a client-side JavaScript that checks a HTML document or source code, and detects violations of a defined coding standard.",
   "license": "BSD-3-Clause",
   "main": "index.js",
@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "prepack": "grunt build",
-    "build": "grunt build",
+    "build": "tsc && grunt build",
     "test": "grunt eslint",
     "fix": "prettier --write '**/*.{js,jsx,ts,tsx}'"
   },

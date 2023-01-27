@@ -17,9 +17,9 @@ module.exports = function (grunt) {
         files: {
           "build/HTMLCS.js": [
             "Translations/*.js",
-            "Standards/**/*.js",
-            "HTMLCS.js",
-            "HTMLCS.Util.js",
+            "dist/Standards/**/*.js",
+            "dist/HTMLCS.js",
+            "dist/HTMLCS.Util.js",
           ],
         },
       },
@@ -31,10 +31,10 @@ module.exports = function (grunt) {
         },
         files: {
           "build/HTMLCS.js": [
-            "Translations/*.js",
-            "Standards/**/*.js",
-            "HTMLCS.js",
-            "HTMLCS.Util.js",
+            "dist/Translations/*.js",
+            "dist/Standards/**/*.js",
+            "dist/HTMLCS.js",
+            "dist/HTMLCS.Util.js",
           ],
         },
       },

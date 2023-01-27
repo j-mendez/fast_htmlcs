@@ -22,5 +22,5 @@
     "resolveJsonModule": true,
     "removeComments": true
   },
-  "include": ["./HTMLCS.js", "index.js"]
+  "exclude": ["./Gruntfile.js", "build", "Contrib", "dist" ]
 }

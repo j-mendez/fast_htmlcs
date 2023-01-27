@@ -236,7 +236,7 @@ _global.HTMLCS.util = (function () {
     // Handle titles in svg as a special visually hidden case (hidden by browsers but
     // available to accessibility apis.
     if (
-      element.nodeName.toLowerCase() === "title" &&
+      element.nodeName === "TITLE" &&
       self.findParentNode(element, "svg") !== null
     ) {
       return true;
@@ -451,10 +451,7 @@ _global.HTMLCS.util = (function () {
    * @return {Array}
    */
   self.getAllElements = function (element, selector) {
-    element = element || document;
-    selector = selector || "*";
-
-    var elements = element.querySelectorAll(selector);
+    var elements = (element || document).querySelectorAll(selector || "*");
     var visibleElements = [];
     var auditor = document.getElementById("HTMLCS-wrapper");
     
@@ -1017,7 +1014,6 @@ _global.HTMLCS.util = (function () {
     };
 
     var rows = self.getChildrenForTable(element, "tr");
-    var tdCells = {};
     var skipCells = [];
 
     // Header IDs already used.
@@ -1029,7 +1025,6 @@ _global.HTMLCS.util = (function () {
       rows: 0,
       cols: 0,
     };
-    var missingIds = false;
 
     for (var rownum = 0; rownum < rows.length; rownum++) {
       var row = rows[rownum];
