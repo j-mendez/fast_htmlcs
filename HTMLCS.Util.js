@@ -14,17 +14,6 @@ _global.HTMLCS.util = (function () {
   var self = {};
 
   /**
-   * Trim off excess spaces on either side.
-   *
-   * @param {String} string The string with potentially extraneous whitespace.
-   *
-   * @returns {String}
-   */
-  self.trim = function (string) {
-    return string.replace(/^\s*(.*)\s*$/g, "$1");
-  };
-
-  /**
    * Returns true if the string is "empty" according to WCAG standards.
    *
    * We can test for whether the string is entirely composed of whitespace, but
@@ -1120,7 +1109,7 @@ _global.HTMLCS.util = (function () {
   self.getCellHeaders = function (table) {
     if (typeof table !== "object") {
       return null;
-    } else if (table.nodeName.toLowerCase() !== "table") {
+    } else if (table.nodeName !== "TABLE") {
       return null;
     }
 
@@ -1138,7 +1127,9 @@ _global.HTMLCS.util = (function () {
     // Now determine the row and column headers for the table.
     // Go through once, first finding the th's to load up the header names,
     // then finding the td's to dump them off.
-    var targetNodeNames = ["th", "td"];
+    var targetNodeNames = ["TH", "TD"];
+  
+    // todo: remove array;
     for (var k = 0; k < targetNodeNames.length; k++) {
       var targetNode = targetNodeNames[k];
       for (var rownum = 0; rownum < rows.length; rownum++) {
@@ -1155,7 +1146,7 @@ _global.HTMLCS.util = (function () {
               }
             }
 
-            var nodeName = thisCell.nodeName.toLowerCase();
+            var nodeName = thisCell.nodeName;
             var rowspan = Number(thisCell.getAttribute("rowspan")) || 1;
             var colspan = Number(thisCell.getAttribute("colspan")) || 1;
 
@@ -1174,7 +1165,7 @@ _global.HTMLCS.util = (function () {
             }
 
             if (nodeName === targetNode) {
-              if (nodeName === "th") {
+              if (nodeName === "TH") {
                 // Build up the cell headers.
                 var id = thisCell.getAttribute("id") || "";
 
@@ -1193,7 +1184,7 @@ _global.HTMLCS.util = (function () {
                   };
                   headingIds.cols[i].ids.push(id);
                 }
-              } else if (nodeName === "td") {
+              } else if (nodeName === "TD") {
                 // Dump out the headers and cells.
                 var exp = [];
                 for (var i = rownum; i < rownum + rowspan; i++) {
@@ -1215,6 +1206,7 @@ _global.HTMLCS.util = (function () {
                     .filter(function (value, index, self) {
                       return self.indexOf(value) === index;
                     });
+                    
                   exp = " " + filteredExp.join(" ") + " ";
                   exp = exp
                     .replace(/\s+/g, " ")

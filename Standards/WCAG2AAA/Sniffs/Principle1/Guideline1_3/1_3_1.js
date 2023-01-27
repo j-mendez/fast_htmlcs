@@ -935,7 +935,7 @@ _global.HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_3_1_3_1 = {
 
         if (subel.nodeType === 1) {
           // Element node.
-          if (subel.nodeName.toLowerCase() === "br") {
+          if (subel.nodeName === "BR") {
             // Line break. Join and trim what we have now.
             items.push(thisItem.join(" ").replace(/^\s*(.*?)\s*$/g, "$1"));
             thisItem = [];

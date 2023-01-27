@@ -43,7 +43,7 @@ _global.HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_4_1_4_3_Contrast = {
           if (node.childNodes[i].nodeType === 1) {
             toProcess.push(node.childNodes[i]);
           } else if (node.childNodes[i].nodeType === 3) {
-            if (HTMLCS.util.trim(node.childNodes[i].nodeValue) !== "") {
+            if (node.childNodes[i].nodeValue && node.childNodes[i].nodeValue.trim() !== "") {
               processNode = true;
             }
           }

@@ -41,7 +41,7 @@ _global.HTMLCS_Section508_Sniffs_O = {
     } else {
       if (element.hasAttribute("href") === true) {
         var href = element.getAttribute("href");
-        href = HTMLCS.util.trim(href);
+        href = href.trim();
         if (href.length > 1 && href.charAt(0) === "#") {
           var id = href.substr(1);
 
