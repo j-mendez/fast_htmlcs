@@ -366,8 +366,7 @@ _global.HTMLCS.util = (function () {
    */
   self.isKeyboardTabbable = function (element) {
     if (element.hasAttribute("tabindex") === true) {
-      var index = element.getAttribute("tabindex");
-      if (index === "-1") {
+      if (element.getAttribute("tabindex") === "-1") {
         return false;
       } else {
         return true;
@@ -452,8 +451,8 @@ _global.HTMLCS.util = (function () {
    */
   self.getAllElements = function (element, selector) {
     var elements = (element || document).querySelectorAll(selector || "*");
-    var visibleElements = [];
     var auditor = document.getElementById("HTMLCS-wrapper");
+    var visibleElements = [];
     
     if (auditor) {
       for (const elem of elements) {
@@ -524,12 +523,7 @@ _global.HTMLCS.util = (function () {
    * @returns {Boolean}
    */
   self.isLayoutTable = function (table) {
-    var th = table.querySelector("th");
-    if (th === null) {
-      return true;
-    }
-
-    return false;
+    return table.querySelector("th") === null;
   };
 
   /**
@@ -566,16 +560,19 @@ _global.HTMLCS.util = (function () {
    * It can be either three or six hex digits, as per CSS conventions.
    * It should return a value in the range [0.0, 1.0].
    *
-   * @param {String} colour The colour to calculate from.
+   * @param {String} colour The color to calculate from.
    *
    * @returns {Number}
    */
-  self.relativeLum = function (colour) {
+  self.relativeLum = function (color) {
+    var colour = color;
+  
     if (colour.charAt) {
-      var colour = self.colourStrToRGB(colour);
+      colour = self.colourStrToRGB(colour);
     }
 
     var transformed = {};
+  
     for (var x in colour) {
       if (colour[x] <= 0.03928) {
         transformed[x] = colour[x] / 12.92;
@@ -584,11 +581,7 @@ _global.HTMLCS.util = (function () {
       }
     } //end for
 
-    var lum =
-      transformed.red * 0.2126 +
-      transformed.green * 0.7152 +
-      transformed.blue * 0.0722;
-    return lum;
+    return transformed.red * 0.2126 + transformed.green * 0.7152 + transformed.blue * 0.0722;
   };
 
   /**
@@ -601,8 +594,8 @@ _global.HTMLCS.util = (function () {
    *
    * @returns {Object}
    */
-  self.colourStrToRGB = function (colour) {
-    colour = colour.toLowerCase();
+  self.colourStrToRGB = function (color) {
+    var colour = color.toLowerCase();
 
     if (colour.substring(0, 3) === "rgb") {
       // rgb[a](0, 0, 0[, 0]) format.
@@ -659,7 +652,7 @@ _global.HTMLCS.util = (function () {
    * @returns {String}
    */
   self.RGBtoColourStr = function (colour) {
-    colourStr = "#";
+    var colourStr = "#";
     colour.red = Math.round(colour.red * 255);
     colour.green = Math.round(colour.green * 255);
     colour.blue = Math.round(colour.blue * 255);
@@ -842,7 +835,7 @@ _global.HTMLCS.util = (function () {
 
       // If it's an element, add any sub-nodes to the process list.
       if (node.nodeType === 1) {
-        if (node.nodeName.toLowerCase() === "img") {
+        if (node.nodeName === "IMG") {
           // If an image, include the alt text unless we are blocking it.
           if (includeAlt === true && node.hasAttribute("alt") === true) {
             text.push(node.getAttribute("alt"));
@@ -859,8 +852,7 @@ _global.HTMLCS.util = (function () {
     }
 
     // Push the text nodes together and trim.
-    text = text.join("").replace(/^\s+|\s+$/g, "");
-    return text;
+    return text.join("").replace(/^\s+|\s+$/g, "");
   };
 
   /**
@@ -902,67 +894,8 @@ _global.HTMLCS.util = (function () {
     }
   };
 
-  /**
-   * Returns TRUE if the provided node name is not a valid phrasing node.
-   *
-   * @param {String} nodeName The node name to test.
-   *
-   * @return {Boolean}
-   */
-  self.isPhrasingNode = function (nodeName) {
-    var nodeNames = [
-      "abbr",
-      "audio",
-      "b",
-      "bdo",
-      "br",
-      "button",
-      "canvas",
-      "cite",
-      "code",
-      "command",
-      "data",
-      "datalist",
-      "dfn",
-      "em",
-      "embed",
-      "i",
-      "iframe",
-      "img",
-      "input",
-      "kbd",
-      "keygen",
-      "label",
-      "mark",
-      "math",
-      "meter",
-      "noscript",
-      "object",
-      "output",
-      "progress",
-      "q",
-      "ruby",
-      "samp",
-      "script",
-      "select",
-      "small",
-      "span",
-      "strong",
-      "sub",
-      "sup",
-      "svg",
-      "textarea",
-      "time",
-      "var",
-      "video",
-      "wbr",
-    ];
-
-    return nodeNames.indexOf(nodeName.toLowerCase()) !== -1;
-  };
-
   self.getChildrenForTable = function (table, childNodeName) {
-    if (table.nodeName.toLowerCase() !== "table") {
+    if (table.nodeName !== "TABLE") {
       return null;
     }
 
