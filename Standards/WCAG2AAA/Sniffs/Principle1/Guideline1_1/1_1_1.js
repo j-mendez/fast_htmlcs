@@ -345,8 +345,8 @@ _global.HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_1_1_1_1 = {
       //     (This leaves one link with no text at all - the two should be
       //      combined into one link.)
       if (nodes.anchor.text === "") {
-        var prevLink = HTMLCS.util.getPreviousSiblingElement(anchor, "a", true);
-        var nextLink = HTMLCS.util.getNextSiblingElement(anchor, "a", true);
+        var prevLink = HTMLCS.util.getPreviousSiblingElement(anchor, "A", true);
+        var nextLink = HTMLCS.util.getNextSiblingElement(anchor, "A", true);
 
         if (prevLink !== null) {
           nodes.previous = {

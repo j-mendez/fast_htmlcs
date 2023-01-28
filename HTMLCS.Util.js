@@ -117,9 +117,8 @@ _global.HTMLCS.util = (function () {
       // XHTML5 has no doctype (at all) normally, but it only counts if the
       // content type it was sent as is set correctly
       if (document.contentType === "application/xhtml+xml") {
-        var htmlElement = document.querySelector("html");
         if (
-          htmlElement.getAttribute("xmlns") === "http://www.w3.org/1999/xhtml"
+          document.querySelector("html").getAttribute("xmlns") === "http://www.w3.org/1999/xhtml"
         ) {
           retval = "xhtml5";
         }
@@ -233,6 +232,7 @@ _global.HTMLCS.util = (function () {
 
     // Do not point to elem if its hidden. Use computed styles.
     var style = self.style(element);
+
     if (style !== null) {
       if (style.visibility === "hidden" || style.display === "none") {
         hidden = true;
@@ -324,22 +324,15 @@ _global.HTMLCS.util = (function () {
 
     var nodeName = element.nodeName;
 
-    // Form elements.
     if (
+      // Hyperlinks without empty hrefs are focusable.
+      nodeName === "A" && element.hasAttribute("href") && /^\s*$/.test(element.getAttribute("href")) === false ||
+      // Form elements.
       nodeName === "INPUT" ||
       nodeName === "SELECT" ||
       nodeName === "TEXTAREA" ||
       nodeName === "BUTTON" ||
       nodeName === "OBJECT") {
-      return true;
-    }
-
-    // Hyperlinks without empty hrefs are focusable.
-    if (
-      nodeName === "A" &&
-      element.hasAttribute("href") &&
-      /^\s*$/.test(element.getAttribute("href")) === false
-    ) {
       return true;
     }
 
@@ -963,7 +956,7 @@ _global.HTMLCS.util = (function () {
             }
           }
 
-          var nodeName = cell.nodeName.toLowerCase();
+          var nodeName = cell.nodeName;
           var rowspan = Number(cell.getAttribute("rowspan")) || 1;
           var colspan = Number(cell.getAttribute("colspan")) || 1;
 
@@ -981,7 +974,7 @@ _global.HTMLCS.util = (function () {
             }
           }
 
-          if (nodeName === "th") {
+          if (nodeName === "TH") {
             var id = cell.getAttribute("id") || "";
 
             // Save the fact that we have a missing ID on the header.
@@ -1010,7 +1003,7 @@ _global.HTMLCS.util = (function () {
               headerIds.rows[rownum] += colspan;
               headerIds.cols[colnum] += rowspan;
             } //end if
-          } else if (nodeName === "td") {
+          } else if (nodeName === "TD") {
             if (
               cell.hasAttribute("headers") === true &&
               /^\s*$/.test(cell.getAttribute("headers")) === false
@@ -1330,7 +1323,7 @@ _global.HTMLCS.util = (function () {
         // If this an element, we break regardless. If it's an "a" node,
         // it's the one we want. Otherwise, there is no adjacent "a" node
         // and it can be ignored.
-        if (tagName === null || nextNode.nodeName.toLowerCase() === tagName) {
+        if (tagName === null || nextNode.nodeName === tagName) {
           // Correct element, or we aren't picky.
           break;
         } else if (immediate === true) {

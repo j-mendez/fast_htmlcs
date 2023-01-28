@@ -1,8 +1,7 @@
 _global.HTMLCS = new (function () {
-  var _standards = {};
-  var _sniffs = [];
-  var _tags = {};
-  var _standard = null;
+  var _standards = new Map();
+  var _tags = new Map();
+  var _standard = "";
   var _currentSniff = null;
 
   var _messages = [];
@@ -34,11 +33,9 @@ _global.HTMLCS = new (function () {
     failCallback,
     language
   ) {
-    // Clear previous runs.
-    _standards = {};
-    _sniffs = [];
-    _tags = {};
-    _standard = null;
+    // Clear previous runs. todo: remove for clear opt
+    _standards.size && _standards.clear();
+    _tags.size && _tags.clear();
 
     if (!content) {
       return false;
@@ -50,7 +47,7 @@ _global.HTMLCS = new (function () {
       this.lang = language;
     }
 
-    if (_standards[_getStandardPath(standard)]) {
+    if (_standards.has(_getStandardPath(standard))) {
       HTMLCS.run(callback, content);
     } else {
       this.loadStandard(
@@ -181,6 +178,7 @@ _global.HTMLCS = new (function () {
     // Get all the elements in the parent element.
     // Add the parent element too, which will trigger "_top" element codes.
     var elements = HTMLCS.util.getAllElements(element);
+
     elements.unshift(element);
 
     // Run the sniffs.
@@ -277,6 +275,7 @@ _global.HTMLCS = new (function () {
    */
   var _run = function (elements, topElement, callback) {
     var topMsgs = [];
+
     while (elements.length > 0) {
       var element = elements.shift();
       var tagName = "";
@@ -299,13 +298,17 @@ _global.HTMLCS = new (function () {
         }
       } //end for
 
-      if (_tags[tagName] && _tags[tagName].length > 0) {
-        _processSniffs(element, _tags[tagName], topElement);
+      if (_tags.has(tagName)) {
+        const tag = _tags.get(tagName);
 
-        // Save "top" messages, and reset the messages array.
-        if (tagName === "_top") {
-          topMsgs = _messages;
-          _messages = [];
+        if (tag.length > 0) {
+          _processSniffs(element, tag, topElement);
+  
+          // Save "top" messages, and reset the messages array.
+          if (tagName === "_top") {
+            topMsgs = _messages;
+            _messages = [];
+          }
         }
       }
     } //end while
@@ -414,7 +417,7 @@ _global.HTMLCS = new (function () {
       }
     }
 
-    _standards[standard] = ruleSet;
+    _standards.set(standard, ruleSet);
 
     // Process the options.
     if (options) {
@@ -520,6 +523,7 @@ _global.HTMLCS = new (function () {
   var _registerSniff = function (standard, sniff) {
     // Get the sniff object.
     var sniffObj = _getSniff(standard, sniff);
+
     if (!sniffObj) {
       return false;
     }
@@ -529,15 +533,13 @@ _global.HTMLCS = new (function () {
       var watchedTags = sniffObj.register();
 
       for (var i = 0; i < watchedTags.length; i++) {
-        if (!_tags[watchedTags[i]]) {
-          _tags[watchedTags[i]] = [];
+        if (!_tags.has(watchedTags[i])) {
+          _tags.set(watchedTags[i], [sniffObj]);
+        } else {
+          _tags.get(watchedTags[i]).push(sniffObj);
         }
-
-        _tags[watchedTags[i]].push(sniffObj);
       }
     }
-
-    _sniffs.push(sniffObj);
   };
 
   /**
@@ -565,17 +567,16 @@ _global.HTMLCS = new (function () {
   var _getStandardPath = function (standard) {
     // Get the include path of a local standard.
     var scripts = document.getElementsByTagName("script");
-    var path = null;
+    var path = "";
 
     // Loop through all the script tags that exist in the document and find the one
     // that has included this file.
-    for (var i = 0; i < scripts.length; i++) {
-      if (scripts[i].src) {
-        if (scripts[i].src.match(/HTMLCS\.js/)) {
+    for (const script of scripts) {
+      if (script.src) {
+        if (script.src.endsWith("HTMLCS.js")) {
           // We have found our appropriate <script> tag that includes
           // this file, we can extract the path.
-          path = scripts[i].src.replace(/HTMLCS\.js/, "");
-
+          path = script.src.replace(/HTMLCS\.js/, "");
           // trim any trailing bits
           path = path.substring(0, path.indexOf("?"));
           break;
@@ -596,7 +597,9 @@ _global.HTMLCS = new (function () {
    */
   var _getSniff = function (standard, sniff) {
     var name = "HTMLCS_";
-    name += _standards[standard].name + "_Sniffs_";
+    var cstandard = _standards.has(standard) && _standards.get(standard); // standard should always exist
+
+    name += (cstandard && cstandard.name || "") + "_Sniffs_";
     name += sniff.split(".").join("_");
 
     if (!_global[name]) {

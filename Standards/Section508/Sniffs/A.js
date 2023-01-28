@@ -94,12 +94,12 @@ _global.HTMLCS_Section508_Sniffs_A = {
     for (var el = 0; el < elements.length; el++) {
       var element = elements[el];
 
-      var nodeName = element.nodeName.toLowerCase();
+      var nodeName = element.nodeName;
       var linkOnlyChild = false;
       var missingAlt = false;
       var nullAlt = false;
 
-      if (element.parentNode.nodeName.toLowerCase() === "a") {
+      if (element.parentNode.nodeName === "A") {
         var prevNode = HTMLCS.util.getPreviousSiblingElement(element, null);
         var nextNode = HTMLCS.util.getNextSiblingElement(element, null);
 
@@ -130,7 +130,7 @@ _global.HTMLCS_Section508_Sniffs_A = {
 
       // Now determine which test(s) should fire.
       switch (nodeName) {
-        case "img":
+        case "IMG":
           if (
             linkOnlyChild === true &&
             (missingAlt === true || nullAlt === true)
@@ -157,7 +157,7 @@ _global.HTMLCS_Section508_Sniffs_A = {
           }
           break;
 
-        case "input":
+        case "INPUT":
           // Image submit buttons.
           if (missingAlt === true || nullAlt === true) {
             errors.inputImage.missingAlt.push(element);
@@ -166,7 +166,7 @@ _global.HTMLCS_Section508_Sniffs_A = {
           }
           break;
 
-        case "area":
+        case "AREA":
           // Area tags in a client-side image map.
           if (missingAlt === true || nullAlt === true) {
             errors.area.missingAlt.push(element);
