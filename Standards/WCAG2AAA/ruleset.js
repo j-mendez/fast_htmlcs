@@ -609,6 +609,7 @@ _global.HTMLCS_WCAG2AAA = {
       principles[principle].name,
       "</a>",
     ].join("");
+
     var retval = [
       [
         _global.HTMLCS.getTranslation("auditor_success_criterion"),

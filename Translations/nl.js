@@ -1,47 +1,7 @@
 _global.translation["nl"] = {
   //HTMLCSAuditor.js
-  auditor_name: "HTML_CodeSniffer door Squiz",
-  auditor_using_standard: "Gebruikt de standaard",
-  auditor_standards: "Standaarden",
-  auditor_code_snippet: "Codefragment",
-  auditor_close: "Sluiten",
-  auditor_select_types: "Kies welk type problemen op te nemen in het verslag",
-  auditor_home: "Home",
-  auditor_view_report: "Bekijk het verslag",
-  auditor_report: "Verslag",
-  auditor_back_to_report: "Terug naar het verslag",
-  auditor_previous_issue: "Vorig probleem",
-  auditor_next_issue: "Volgend probleem",
-  auditor_issue: "Probleem",
-  auditor_of: "van",
-  auditor_errors: "Fouten",
-  auditor_error: "Fout",
-  auditor_warnings: "Waarschuwingen",
-  auditor_warning: "Waarschuwing",
-  auditor_notices: "Kennisgevingen",
-  auditor_notice: "Kennisgeving",
-  auditor_toggle_display_of: "Schakel weergave van",
-  auditor_messages: "berichten",
-  auditor_unable_to_point:
-    "Kan niet wijzen naar het element waarop dit probleem betrekking heeft.",
-  auditor_unable_to_point_entire:
-    "Kan niet wijzen naar dit probleem, aangezien het betrekking heeft op het hele document",
-  auditor_unable_to_point_removed:
-    "Kan niet wijzen naar dit element, het werd verwijderd sedert de aanmaak van dit verslag",
-  auditor_unable_to_point_outside:
-    "Kan niet wijzen naar dit element, het bevindt zich buiten het body-element van de pagina",
-  auditor_unable_to_point_hidden:
-    "Kan niet wijzen naar dit element, het is verborgen of heeft geen visuele representatie",
-  auditor_point_to_element: "Wijzen naar het element",
-  auditor_unsupported_browser:
-    "De codefragment functionaliteit wordt niet ondersteund door deze browser",
-  auditor_page: "Pagina",
-  auditor_updated_to: "HTML_CodeSniffer werd bijgewerkt naar versie",
-  auditor_view_the_changelog: "Bekijk de changelog",
   auditor_success_criterion: "Succescriterium",
   auditor_suggested_techniques: "Voorgestelde technieken",
-  auditor_applies_entire_document: "Dit is van toepassing op het hele document",
-
   //1_1_1.js
   "1_1_1_H30.2":
     "Img element is de enige inhoud van de link, maar bevat geen alt tekst. De alt tekst dient het doel van deze link te beschrijven.",

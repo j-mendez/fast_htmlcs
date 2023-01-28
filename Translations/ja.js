@@ -1,46 +1,7 @@
 _global.translation["ja"] = {
   //HTMLCSAuditor.js
-  auditor_name: "HTML_CodeSniffer",
-  auditor_using_standard: "Using standard",
-  auditor_standards: "適合レベル",
-  auditor_code_snippet: "コードスニペット",
-  auditor_close: "閉じる",
-  auditor_select_types: "レポートに含める報告の種類を選択してください",
-  auditor_home: "ホーム",
-  auditor_view_report: "レポートをみる",
-  auditor_report: "レポート",
-  auditor_back_to_report: "レポートに戻る",
-  auditor_previous_issue: "前の報告",
-  auditor_next_issue: "次の報告",
-  auditor_issue: "報告",
-  auditor_of: "/",
-  auditor_errors: "エラー",
-  auditor_error: "エラー",
-  auditor_warnings: "警告",
-  auditor_warning: "警告",
-  auditor_notices: "通知",
-  auditor_notice: "通知",
-  auditor_toggle_display_of: "Toggle display of",
-  auditor_messages: "メッセージ",
-  auditor_unable_to_point: "この報告に関係する要素の位置を特定できません。",
-  auditor_unable_to_point_entire:
-    "この報告はドキュメント全体に関係するため、問題の位置を特定できません。",
-  auditor_unable_to_point_removed:
-    "この要素はレポート作成後に削除されたため、要素の位置を特定できません。",
-  auditor_unable_to_point_outside:
-    "この要素はドキュメントボディの外に位置するため、要素の位置を特定できません。",
-  auditor_unable_to_point_hidden:
-    "この要素はビューから隠れているか、視覚表現をもたないため、要素の位置を特定できません。",
-  auditor_point_to_element: "要素の位置を特定",
-  auditor_unsupported_browser:
-    "このコードスニペットの機能は、このブラウザでサポートされていません。",
-  auditor_page: "ページ",
-  auditor_updated_to: "HTML_CodeSniffer のバージョンがアップデートされました",
-  auditor_view_the_changelog: "更新履歴をみる",
   auditor_success_criterion: "成功基準",
   auditor_suggested_techniques: "推奨される手法",
-  auditor_applies_entire_document: "これはドキュメント全体に適用されます",
-
   //1_1_1.js
   "1_1_1_H30.2":
     "img 要素がこのリンクの唯一のコンテンツですが、 alt テキストがありません。 alt テキストがリンクの目的を説明するべきです。",

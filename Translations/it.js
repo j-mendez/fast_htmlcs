@@ -1,48 +1,7 @@
 _global.translation["it"] = {
   //HTMLCSAuditor.js
-  auditor_name: "HTML_CodeSniffer di Squiz",
-  auditor_using_standard: "Standard in uso: ",
-  auditor_standards: "Standard",
-  auditor_code_snippet: "Codice coinvolto",
-  auditor_close: "Chiudi",
-  auditor_select_types:
-    "Seleziona il tipo di verifiche da includere nel report",
-  auditor_home: "Inizio",
-  auditor_view_report: "Risultati del report",
-  auditor_report: "Report",
-  auditor_back_to_report: "Torna al report",
-  auditor_previous_issue: "Problema Precedente",
-  auditor_next_issue: "Problema Successivo",
-  auditor_issue: "Problema",
-  auditor_of: "di",
-  auditor_errors: "Errori",
-  auditor_error: "Errore",
-  auditor_warnings: "Avvisi",
-  auditor_warning: "Avviso",
-  auditor_notices: "Note",
-  auditor_notice: "Nota",
-  auditor_toggle_display_of: "Visibilità di",
-  auditor_messages: "messaggi",
-  auditor_unable_to_point:
-    "Unable to point to the element associated with this issue.",
-  auditor_unable_to_point_entire:
-    "Unable to point to this issue, as it relates to the entire document.",
-  auditor_unable_to_point_removed:
-    "Unable to point to this element as it has been removed from the document since the report was generated.",
-  auditor_unable_to_point_outside:
-    "Unable to point to this element because it is located outside the document's body element.",
-  auditor_unable_to_point_hidden:
-    "Unable to point to this element because it is hidden from view, or does not have a visual representation.",
-  auditor_point_to_element: "Point to Element",
-  auditor_unsupported_browser:
-    "La funzionalità «parte di codice» non funziona su questo browser.",
-  auditor_page: "Pagina",
-  auditor_updated_to: "Abbiamo aggiornato HTML_CodeSniffer alla versione",
-  auditor_view_the_changelog: "Elenco delle modifiche",
   auditor_success_criterion: "Requisito di successo",
   auditor_suggested_techniques: "Tecniche suggerite",
-  auditor_applies_entire_document: "Si applica a tutto il documento",
-
   //1_1_1.js
   "1_1_1_H30.2":
     "Img element is the only content of the link, but is missing alt text. The alt text should describe the purpose of the link.",

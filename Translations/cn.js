@@ -1,44 +1,7 @@
 _global.translation["cn"] = {
   //HTMLCSAuditor.js
-  auditor_name: "HTML_CodeSniffer",
-  auditor_using_standard: "使用标准",
-  auditor_standards: "标准",
-  auditor_code_snippet: "代码片断",
-  auditor_close: "关闭",
-  auditor_select_types: "选择要包含在报告中的问题类型",
-  auditor_home: "首页",
-  auditor_view_report: "查看报告",
-  auditor_report: "报告",
-  auditor_back_to_report: "回到报告",
-  auditor_previous_issue: "上一个问题",
-  auditor_next_issue: "下一个问题",
-  auditor_issue: "问题",
-  auditor_of: "总共",
-  auditor_errors: "错误",
-  auditor_error: "错误",
-  auditor_warnings: "警告",
-  auditor_warning: "警告",
-  auditor_notices: "提醒",
-  auditor_notice: "提醒",
-  auditor_toggle_display_of: "切换显示",
-  auditor_messages: "消息",
-  auditor_unable_to_point: "无法通过这个问题指向关联的元素。",
-  auditor_unable_to_point_entire: "无法指向这个问题，因为它与整个文档有关。",
-  auditor_unable_to_point_removed:
-    "无法指向这个元素，因为自报告生成以来它已经从文档中被移除了。",
-  auditor_unable_to_point_outside:
-    "无法指向这个元素，因为它位于文档的body元素外。",
-  auditor_unable_to_point_hidden:
-    "无法指向这个元素，因为它已经从视图中隐藏，或它没有一个视觉表现。",
-  auditor_point_to_element: "指向这个元素",
-  auditor_unsupported_browser: "这个代码片断功能在这个浏览器中已经不被支持",
-  auditor_page: "页",
-  auditor_updated_to: "HTML_CodeSniffer 已更新到版本",
-  auditor_view_the_changelog: "查看更新日志",
   auditor_success_criterion: "成功标准",
   auditor_suggested_techniques: "建议技巧",
-  auditor_applies_entire_document: "应用于全部文档",
-
   //1_1_1.js
   "1_1_1_H30.2":
     "Img 元素是链接的唯一内容，但是缺少了 alt 文本，alt 文本应该描述链接的用途",

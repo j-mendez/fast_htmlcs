@@ -1,48 +1,7 @@
 _global.translation["fr"] = {
   //HTMLCSAuditor.js
-  auditor_name: "HTML_CodeSniffer par Squiz",
-  auditor_using_standard: "Utilisation de la norme",
-  auditor_standards: "Normes",
-  auditor_code_snippet: "Bout de code",
-  auditor_close: "Fermer",
-  auditor_select_types:
-    "Sélectionner les types de questions à inclure dans le rapport",
-  auditor_home: "Accueil",
-  auditor_view_report: "Voir le rapport",
-  auditor_report: "Rapport",
-  auditor_back_to_report: "Retour au rapport",
-  auditor_previous_issue: "Problème précédent",
-  auditor_next_issue: "Prochain problème",
-  auditor_issue: "Problème",
-  auditor_of: "de",
-  auditor_errors: "Erreurs",
-  auditor_error: "Erreur",
-  auditor_warnings: "Attentions",
-  auditor_warning: "Attention",
-  auditor_notices: "Avis",
-  auditor_notice: "Avis",
-  auditor_toggle_display_of: "Basculer l'affichage de",
-  auditor_messages: "messages",
-  auditor_unable_to_point:
-    "Impossible de pointer vers l'élément associé à ce problème.",
-  auditor_unable_to_point_entire:
-    "Impossible d'attirer l'attention sur cette question, car elle concerne l'ensemble du document.",
-  auditor_unable_to_point_removed:
-    "Impossible de pointer vers cet élément car il a été supprimé du document depuis que le rapport a été généré.",
-  auditor_unable_to_point_outside:
-    "Impossible de pointer vers cet élément parce qu'il est situé à l'extérieur de l'élément de corps du document.",
-  auditor_unable_to_point_hidden:
-    "Impossible de pointer vers cet élément parce qu'il est caché de la vue ou n'a pas de représentation visuelle.",
-  auditor_point_to_element: "Pointer vers l'élément",
-  auditor_unsupported_browser:
-    "La fonctionnalité d'extrait de code n'est pas prise en charge dans ce navigateur.",
-  auditor_page: "Page",
-  auditor_updated_to: "HTML_CodeSniffer a été mis à jour en version",
-  auditor_view_the_changelog: "Voir le journal des modifications",
   auditor_success_criterion: "Critère de réussite",
   auditor_suggested_techniques: "Techniques suggérées",
-  auditor_applies_entire_document: "Ceci s'applique à l'ensemble du document",
-
   //1_1_1.js
   "1_1_1_H30.2":
     "L'élément Img est le seul contenu du lien, mais il manque le texte alt. Le texte alternatif devrait décrire le but du lien.",

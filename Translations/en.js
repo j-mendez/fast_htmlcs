@@ -1,47 +1,7 @@
 _global.translation["en"] = {
   //HTMLCSAuditor.js
-  auditor_name: "HTML_CodeSniffer by Squiz",
-  auditor_using_standard: "Using standard",
-  auditor_standards: "Standards",
-  auditor_code_snippet: "Code Snippet",
-  auditor_close: "Close",
-  auditor_select_types: "Select the types of issues to include in the report",
-  auditor_home: "Home",
-  auditor_view_report: "View Report",
-  auditor_report: "Report",
-  auditor_back_to_report: "Back to Report",
-  auditor_previous_issue: "Previous Issue",
-  auditor_next_issue: "Next Issue",
-  auditor_issue: "Issue",
-  auditor_of: "of",
-  auditor_errors: "Errors",
-  auditor_error: "Error",
-  auditor_warnings: "Warnings",
-  auditor_warning: "Warning",
-  auditor_notices: "Notices",
-  auditor_notice: "Notice",
-  auditor_toggle_display_of: "Toggle display of",
-  auditor_messages: "messages",
-  auditor_unable_to_point:
-    "Unable to point to the element associated with this issue.",
-  auditor_unable_to_point_entire:
-    "Unable to point to this issue, as it relates to the entire document.",
-  auditor_unable_to_point_removed:
-    "Unable to point to this element as it has been removed from the document since the report was generated.",
-  auditor_unable_to_point_outside:
-    "Unable to point to this element because it is located outside the document's body element.",
-  auditor_unable_to_point_hidden:
-    "Unable to point to this element because it is hidden from view, or does not have a visual representation.",
-  auditor_point_to_element: "Point to Element",
-  auditor_unsupported_browser:
-    "The code snippet functionality is not supported in this browser.",
-  auditor_page: "Page",
-  auditor_updated_to: "HTML_CodeSniffer has been updated to version",
-  auditor_view_the_changelog: "View the changelog",
   auditor_success_criterion: "Success Criterion",
   auditor_suggested_techniques: "Suggested Techniques",
-  auditor_applies_entire_document: "This applies to the entire document",
-
   //1_1_1.js
   "1_1_1_H30.2":
     "Img element is the only content of the link, but is missing alt text. The alt text should describe the purpose of the link.",

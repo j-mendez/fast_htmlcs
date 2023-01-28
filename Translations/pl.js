@@ -1,47 +1,7 @@
 _global.translation["pl"] = {
   //HTMLCSAuditor.js
-  auditor_name: "Squiz HTML_CodeSniffer",
-  auditor_using_standard: "Używany standard",
-  auditor_standards: "Standardy",
-  auditor_code_snippet: "Fragment kodu",
-  auditor_close: "Zamknij",
-  auditor_select_types: "Wybierz typy błędów, które mają być w raporcie",
-  auditor_home: "Start",
-  auditor_view_report: "Zobacz raport",
-  auditor_report: "Raport",
-  auditor_back_to_report: "Powrót do raportu",
-  auditor_previous_issue: "Poprzedni problem",
-  auditor_next_issue: "Następny problem",
-  auditor_issue: "Problem",
-  auditor_of: "z",
-  auditor_errors: "Błędy",
-  auditor_error: "Błąd",
-  auditor_warnings: "Ostrzeżenia",
-  auditor_warning: "Ostrzeżenie",
-  auditor_notices: "Uwagi",
-  auditor_notice: "Uwaga",
-  auditor_toggle_display_of: "Przełącz wyświetlanie",
-  auditor_messages: "komunikatów",
-  auditor_unable_to_point:
-    "Nie można wskazać elementu powiązanego z tym kryterium.",
-  auditor_unable_to_point_entire:
-    "Nie można wskazać tego problemu, ponieważ dotyczy całego dokumentu.",
-  auditor_unable_to_point_removed:
-    "Nie można wskazać tego elementu, ponieważ został usunięty z dokumentu od momentu wygenerowania raportu.",
-  auditor_unable_to_point_outside:
-    "Nie można wskazać tego elementu, ponieważ znajduje się poza elementem treści dokumentu.",
-  auditor_unable_to_point_hidden:
-    "Nie można wskazać tego elementu, ponieważ jest niewidoczny lub nie ma reprezentacji wizualnej.",
-  auditor_point_to_element: "Pokaż element",
-  auditor_unsupported_browser:
-    "Funkcja nie jest obsługiwana w tej przeglądarce.",
-  auditor_page: "Strona",
-  auditor_updated_to: "HTML_CodeSniffer został zaktualizowany do wersji",
-  auditor_view_the_changelog: "Zobacz dziennik zmian",
   auditor_success_criterion: "Kryteria sukcesu",
   auditor_suggested_techniques: "Sugerowane techniki",
-  auditor_applies_entire_document: "Dotyczy to całego dokumentu",
-
   //1_1_1.js
   "1_1_1_H30.2":
     "Grafika jest jedyną treścią linku i powinna zostać uzupełniona o opis alternatywny opisujący jego cel.",
