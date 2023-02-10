@@ -33,6 +33,7 @@ _global.HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_4_1_4_3_Contrast = {
       if (
         node &&
         node.nodeType === 1 &&
+        node.nodeName !== "TITLE" &&
         HTMLCS.util.isVisuallyHidden(node) === false &&
         HTMLCS.util.isDisabled(node) === false
       ) {

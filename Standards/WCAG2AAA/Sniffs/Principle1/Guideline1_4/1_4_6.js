@@ -42,6 +42,10 @@ _global.HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_4_1_4_6 = {
       for (var i = 0; i < failures.length; i++) {
         var element = failures[i].element;
 
+        if(element && element.nodeName === "TITLE") {
+          continue;
+        }
+        
         var decimals = 2;
         var value =
           Math.round(failures[i].value * Math.pow(10, decimals)) /
@@ -50,6 +54,7 @@ _global.HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_4_1_4_6 = {
         var recommend = failures[i].recommendation;
         var hasBgImg = failures[i].hasBgImage || false;
         var isAbsolute = failures[i].isAbsolute || false;
+        var code = "";
 
         // If the values would look identical, add decimals to the value.
         while (required === value) {
@@ -60,9 +65,9 @@ _global.HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_4_1_4_6 = {
         }
 
         if (required === 4.5) {
-          var code = "G18";
+          code = "G18";
         } else if (required === 7.0) {
-          var code = "G17";
+          code = "G17";
         }
 
         var recommendText = [];

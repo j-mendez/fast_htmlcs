@@ -42,6 +42,10 @@ _global.HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_4_1_4_3 = {
       for (var i = 0; i < failures.length; i++) {
         var element = failures[i].element;
 
+        if(element && element.nodeName === "TITLE") {
+          continue;
+        }
+
         var decimals = 2;
         var value =
           Math.round(failures[i].value * Math.pow(10, decimals)) /
@@ -51,6 +55,7 @@ _global.HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_4_1_4_3 = {
         var hasBgImg = failures[i].hasBgImage || false;
         var isAbsolute = failures[i].isAbsolute || false;
         var hasAlpha = failures[i].hasAlpha || false;
+        var code = "";
 
         // If the values would look identical, add decimals to the value.
         while (required === value) {
@@ -61,9 +66,9 @@ _global.HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_4_1_4_3 = {
         }
 
         if (required === 4.5) {
-          var code = "G18";
+          code = "G18";
         } else if (required === 3.0) {
-          var code = "G145";
+          code = "G145";
         }
 
         var recommendText = [];
@@ -129,15 +134,15 @@ _global.HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_4_1_4_3 = {
             code
           );
         } else {
-          code += ".Fail";
-          HTMLCS.addMessage(
-            HTMLCS.ERROR,
-            element,
-            _global.HTMLCS.getTranslation("1_4_3_G18_or_G145.Fail")
-              .replace(/\{\{required\}\}/g, required)
-              .replace(/\{\{value\}\}/g, value) + recommendText,
-            code
-          );
+            code += ".Fail";
+            HTMLCS.addMessage(
+              HTMLCS.ERROR,
+              element,
+              _global.HTMLCS.getTranslation("1_4_3_G18_or_G145.Fail")
+                .replace(/\{\{required\}\}/g, required)
+                .replace(/\{\{value\}\}/g, value) + recommendText,
+              code
+            );
         } //end if
       } //end for
     } //end if
