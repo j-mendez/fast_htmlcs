@@ -41,11 +41,6 @@ _global.HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_4_1_4_3 = {
 
       for (var i = 0; i < failures.length; i++) {
         var element = failures[i].element;
-
-        if(element && element.nodeName === "TITLE") {
-          continue;
-        }
-
         var decimals = 2;
         var value =
           Math.round(failures[i].value * Math.pow(10, decimals)) /

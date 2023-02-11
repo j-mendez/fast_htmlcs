@@ -224,7 +224,7 @@ _global.HTMLCS.util = (function () {
     // Handle titles in svg as a special visually hidden case (hidden by browsers but
     // available to accessibility apis.
     if (
-      element.nodeName === "TITLE" &&
+      element.nodeName === "title" &&
       self.findParentNode(element, "svg") !== null
     ) {
       return true;
