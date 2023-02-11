@@ -72,6 +72,7 @@ _global.HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_4_1_4_3 = {
         }
 
         var recommendText = [];
+
         if (recommend) {
           if (recommend.fore.from !== recommend.fore.to) {
             recommendText.push(
@@ -143,8 +144,8 @@ _global.HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_4_1_4_3 = {
                 .replace(/\{\{value\}\}/g, value) + recommendText,
               code
             );
-        } //end if
-      } //end for
-    } //end if
+        }
+      }
+    }
   },
 };

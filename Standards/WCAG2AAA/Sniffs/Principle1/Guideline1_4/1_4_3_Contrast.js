@@ -20,10 +20,10 @@ _global.HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_4_1_4_3_Contrast = {
       var body = top.getElementsByTagName("body");
       if (body.length) {
         // SVG objects will not have a body element. Don't check them.
-        var toProcess = [body[0]];
+        toProcess = [body[0]];
       }
     } else {
-      var toProcess = [top];
+      toProcess = [top];
     }
 
     while (toProcess.length > 0) {
@@ -33,7 +33,6 @@ _global.HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_4_1_4_3_Contrast = {
       if (
         node &&
         node.nodeType === 1 &&
-        node.nodeName !== "TITLE" &&
         HTMLCS.util.isVisuallyHidden(node) === false &&
         HTMLCS.util.isDisabled(node) === false
       ) {
@@ -206,7 +205,7 @@ _global.HTMLCS_WCAG2AAA_Sniffs_Principle1_Guideline1_4_1_4_3_Contrast = {
           } //end if
         } //end if
       } //end if
-    } //end while
+    }
 
     return failures;
   },
